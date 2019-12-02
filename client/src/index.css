@@ -1,0 +1,32 @@
+* {
+  font-family: Roboto, sans-serif;  
+}
+
+#plaid-login {
+  margin-top: 10%;
+  width: 100%;
+}
+
+#divisor-selector {
+  margin-left: 40%;
+}
+
+#amount-display {
+  width: 100%;
+  margin: auto;
+}
+
+.center {
+  margin: auto;
+}
+
+.half-wide-centered {
+  padding-left: 45%;
+  padding-right: 45%;
+  margin-top: 20%;
+}
+
+.table-row {
+  display: table-row;
+}
+
