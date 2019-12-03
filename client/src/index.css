@@ -30,3 +30,6 @@
   display: table-row;
 }
 
+.row-hidden {
+  opacity:0.5;
+}

@@ -1,33 +1,45 @@
 import React from 'react';
 import TableCell from '@material-ui/core/TableCell';
-import { TableRow } from '@material-ui/core';
 import Select from './Select';
 
-function Row(props) {
+class Row extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        visible: props.visible,
+      }
 
-    function handleChange() {
-      props.rowChangeEvent(props.id);
+      this.handleChange = this.handleChange.bind(this);
     }
 
-    return (
-      <tr class='table-row'>
-        {
-          Object.keys(props.data)
-          .filter(key => props.excludedFields.includes(key) === false)
-          .map(key => {
-            return (
-                  <TableCell onClick={handleChange} align="center">
-                    {props.data[key]}
-                  </TableCell>
+    handleChange() {
+      this.props.rowChangeEvent(this.props.id);
+      this.setState({
+        visible: !this.state.visible,
+      });
+    }
+
+    render() {
+      return (
+        <tr className={`table-row ${this.state.visible ? '' : 'row-hidden'}`}>
+          {
+            Object.keys(this.props.data)
+            .filter(key => this.props.excludedFields.includes(key) === false)
+            .map(key => {
+              return (
+                    <TableCell onClick={this.handleChange} align="center">
+                      {this.props.data[key]}
+                    </TableCell>
+                  )
+                }
                 )
               }
-              )
-            }
-        {
-          props.isHeadRow === false && <Select name={props.data.name} onSplitEvent={props.onSplitEvent} />
-        }
-      </tr>
-    )
+          {
+            this.props.isHeadRow === false && <Select name={this.props.data.name} onSplitEvent={this.props.onSplitEvent} />
+          }
+        </tr>
+      )
+    }
   }
 
   export default Row;

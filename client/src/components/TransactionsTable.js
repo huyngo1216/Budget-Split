@@ -25,7 +25,8 @@ function TransactionsTable(props) {
             <Row key='column-titles'
                 data={props.columnNames}
                 isHeadRow={true}
-                excludedFields={[]} />
+                excludedFields={[]}
+                visible={true} />
           </TableHead>
           <TableBody>
             {props.items.map(item => (
@@ -35,7 +36,8 @@ function TransactionsTable(props) {
                     isHeadRow={false}
                     rowChangeEvent={props.rowChangeEvent}
                     onSplitEvent={props.onSplitEvent}
-                    excludedFields={['divisor', 'hidden', 'pending']} />
+                    excludedFields={['divisor', 'hidden', 'pending']}
+                    visible={true}/>
               )
             )}
           </TableBody>

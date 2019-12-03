@@ -13,7 +13,7 @@ const client = new plaid.Client(
     clientId,
     clientSecret,
     publicKey,
-    plaid.environments.sandbox
+    plaid.environments.YOUR_ENVIRONMENT,
 )
 
 app.use(bodyParser.json({
