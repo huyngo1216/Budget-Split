@@ -1,19 +1,22 @@
 const express = require('express')
 var bodyParser = require('body-parser')
 const app = express()
-const port = 8000
 const plaid = require('plaid')
 const moment = require('moment')
-const cors = require("cors");
+const cors = require('cors')
+const dotenv = require('dotenv')
+dotenv.config();
+const port = process.env.PORT;
 
-const publicKey = 'YOUR_PUBLIC_KEY';
-const clientId = 'YOUR_CLIENT_ID';
-const clientSecret = 'YOUR_CLIENT_SECRET';
+const publicKey = process.env.PLAID_PUBLIC_KEY;
+const clientId = process.env.PLAID_CLIENT_ID;
+const clientSecret = process.env.PLAID_CLIENT_SECRET;
+const plaidEnv = process.env.PLAID_ENVIRONMENT;
 const client = new plaid.Client(
     clientId,
     clientSecret,
     publicKey,
-    plaid.environments.YOUR_ENVIRONMENT,
+    plaid.environments[plaidEnv],
 )
 
 app.use(bodyParser.json({

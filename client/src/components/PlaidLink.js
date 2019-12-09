@@ -1,5 +1,4 @@
-import React from 'react'
-import PlaidLink from 'react-plaid-link';
+import React from 'react';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Button from '@material-ui/core/Button';
 
@@ -40,8 +39,8 @@ class PlaidLinkLogin extends React.Component {
     onClick() {
         window.Plaid.create({
             clientName: 'HuyNgo',
-            env: 'sandbox',
-            key: '3015a68e34d69730c6e3126d102046',
+            env: process.env.REACT_APP_PLAID_ENV,
+            key: process.env.REACT_APP_PLAID_PUBLIC_KEY,
             product: ['auth', 'transactions'],
             onSuccess: this.onSuccess,
             onExit: this.onExit,
