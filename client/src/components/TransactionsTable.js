@@ -36,7 +36,7 @@ function TransactionsTable(props) {
                     isHeadRow={false}
                     rowChangeEvent={props.rowChangeEvent}
                     onSplitEvent={props.onSplitEvent}
-                    excludedFields={['divisor', 'hidden', 'pending']}
+                    excludedFields={['divisor', 'hidden', 'pending', 'id']}
                     visible={true}/>
               )
             )}
