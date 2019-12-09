@@ -30,8 +30,8 @@ function TransactionsTable(props) {
           </TableHead>
           <TableBody>
             {props.items.map(item => (
-                  <Row key={item.name}
-                    id={item.name}
+                  <Row key={item.id}
+                    id={item.id}
                     data={item}
                     isHeadRow={false}
                     rowChangeEvent={props.rowChangeEvent}

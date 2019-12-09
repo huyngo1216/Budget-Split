@@ -4,6 +4,7 @@ import PlaidLinkLogin from './PlaidLink';
 import TransactionsTable from './TransactionsTable';
 import Amount from './Amount';
 import TextField from '@material-ui/core/TextField';
+import uuid from 'uuid';
 
 class Transactions extends React.Component {
 
@@ -37,9 +38,9 @@ class Transactions extends React.Component {
         );
     }
 
-    toggleTransactionVisibility(transactionName) {
+    toggleTransactionVisibility(id) {
       const transactions = this.state.transactions.map((transaction) => {
-        if (transaction.name === transactionName) {
+        if (transaction.id === id) {
           transaction.hidden = !transaction.hidden;
         }
         return transaction;
@@ -105,6 +106,7 @@ class Transactions extends React.Component {
                   transaction.hidden = false;
                   // default behavior is to split the cost evenly
                   transaction.divisor = 2;
+                  transaction.id = uuid.v4();
                   return transaction;
                 }),
               total: curryCalcTotal(),
@@ -118,7 +120,7 @@ class Transactions extends React.Component {
     renderLogin() {
       if (!this.state.loggedIn) {
         return (
-          <div class='half-wide-centered'>
+          <div className='half-wide-centered'>
               <TextField
                 label='Day Offset'
                 value={this.state.dayOffset}
