@@ -16,7 +16,8 @@ You'll have to register for an account on Plaid and generate `development` envir
 
 ### Client
 ```
-1. specify Plaid client configuration in `client/.env`
-2. npm install
-3. npm start
+1. cd client/
+2. specify Plaid client configuration in `client/.env`
+3. npm install
+4. npm start
 ```
