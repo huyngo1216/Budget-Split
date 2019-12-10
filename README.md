@@ -9,7 +9,7 @@ You'll have to register for an account on Plaid and generate `development` envir
 
 ### Server
 ```
-1. specify Plaid configuration in `.env`
+1. specify server port + Plaid configuration in `.env`
 2. npm install
 3. node app.js
 ```
@@ -17,7 +17,7 @@ You'll have to register for an account on Plaid and generate `development` envir
 ### Client
 ```
 1. cd client/
-2. specify Plaid client configuration in `client/.env`
+2. specify client port + Plaid client configuration in `client/.env`
 3. npm install
 4. npm start
 ```

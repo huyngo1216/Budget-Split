@@ -6,7 +6,7 @@ const moment = require('moment')
 const cors = require('cors')
 const dotenv = require('dotenv')
 dotenv.config();
-const port = process.env.PORT;
+const port = process.env.PORT || 8000;
 
 const publicKey = process.env.PLAID_PUBLIC_KEY;
 const clientId = process.env.PLAID_CLIENT_ID;
