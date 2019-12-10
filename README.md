@@ -1,6 +1,6 @@
 ## Splitting Expenses
 
-This application enables you to split expenses with your roommate(s). Using [Plaid](https://plaid.com/) to retrieve expenses, the user supplies the number of days to go back for a list of expenses, ordered by date. The server is a simple Express Node.js application and the client is written in React.
+This application enables you to split expenses with your roommate(s). Using [Plaid](https://plaid.com/) to retrieve expenses, the user supplies the number of days to go back for a list of expenses, ordered by date. The server is a simple Express Node.js application and the client is written in React - all packages are managed via npm.
 
 ## Building
 
@@ -18,5 +18,5 @@ You'll have to register for an account on Plaid and generate `development` envir
 ```
 1. specify Plaid client configuration in `client/.env`
 2. npm install
-3. yarn start
+3. npm start
 ```
