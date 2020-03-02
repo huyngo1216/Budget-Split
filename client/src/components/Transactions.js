@@ -55,19 +55,19 @@ class Transactions extends React.Component {
       )
     }
 
-    redistributeSplitEvent(e) {
-        this.redistributeSplit(e.target.value * 1)([e.target.name]);
+    redistributeSplitEvent(id, e) {
+        this.redistributeSplit(e.target.value * 1)([id]);
     }
 
     redistributeSplit = (divisor = 1) => {
       // TODO: add regex check for divisor argument
-      return (transactionNames = []) => {
+      return (transactionIds = []) => {
         this.setState((state) => ({
           splitTotal: state.transactions
               .filter((transaction) => transaction.hidden === false)
               .reduce(
                 (accumulator, transaction) => {
-                  if (transactionNames.includes(transaction.name)) {
+                  if (transactionIds.includes(transaction.id)) {
                     transaction.divisor = divisor;
                   }
                   return accumulator + transaction.amount / transaction.divisor;

@@ -35,7 +35,7 @@ function TransactionsTable(props) {
                     data={item}
                     isHeadRow={false}
                     rowChangeEvent={props.rowChangeEvent}
-                    onSplitEvent={props.onSplitEvent}
+                    onSplitEvent={(e) => props.onSplitEvent(item.id, e)}
                     excludedFields={['divisor', 'hidden', 'pending', 'id']}
                     visible={true}/>
               )

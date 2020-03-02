@@ -35,7 +35,12 @@ class Row extends React.Component {
                 )
               }
           {
-            this.props.isHeadRow === false && <Select name={this.props.data.name} onSplitEvent={this.props.onSplitEvent} />
+            this.props.isHeadRow === false
+            && <Select
+                  name={this.props.data.name}
+                  onSplitEvent={this.props.onSplitEvent}
+                  values={[2,3,4,5,6,1]}
+                />
           }
         </tr>
       )
