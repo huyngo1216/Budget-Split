@@ -4,7 +4,7 @@ import SelectComponent from '@material-ui/core/Select';
 
 function Select(props) {
     return (
-        <td>
+        <td className='select'>
             <FormControl variant="outlined">
                 <SelectComponent
                     name={props.name}

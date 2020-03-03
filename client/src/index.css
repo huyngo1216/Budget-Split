@@ -16,6 +16,11 @@
   margin: auto;
 }
 
+#totals-block {
+  width: 100%;
+  text-align: center;
+}
+
 .center {
   margin: auto;
 }
@@ -26,10 +31,10 @@
   margin-top: 20%;
 }
 
-.table-row {
-  display: table-row;
-}
-
 .row-hidden {
   opacity:0.5;
+}
+
+.select {
+  display: grid;
 }

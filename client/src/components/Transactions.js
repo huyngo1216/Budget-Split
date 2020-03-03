@@ -136,20 +136,24 @@ class Transactions extends React.Component {
       if (this.state.loggedIn) {
         return (
           <div>
-            <Amount
-              label='Total'
-              value={this.state.total}
-            />
-            <Amount
-              label='Split Total'
-              value={this.state.splitTotal}
-            />
-            <TransactionsTable
-              columnNames={['Name', 'Amount', 'Date', 'AccountName', 'Split Divisor']}
-              items={this.state.transactions}
-              rowChangeEvent={this.toggleTransactionVisibility}
-              onSplitEvent={this.redistributeSplitEvent}
-            />
+            <div id='totals-block'>
+              <Amount
+                label='Total'
+                value={this.state.total}
+              />
+              <Amount
+                label='Split Total'
+                value={this.state.splitTotal}
+              />
+            </div>
+            <div>
+              <TransactionsTable
+                columnNames={['Name', 'Amount', 'Date', 'AccountName', 'Split Divisor']}
+                items={this.state.transactions}
+                rowChangeEvent={this.toggleTransactionVisibility}
+                onSplitEvent={this.redistributeSplitEvent}
+              />
+            </div>
           </div>
         )
       }

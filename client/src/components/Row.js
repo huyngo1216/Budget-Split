@@ -13,6 +13,9 @@ class Row extends React.Component {
     }
 
     handleChange() {
+      if (this.props.isHeadRow) {
+        return;
+      }
       this.props.rowChangeEvent(this.props.id);
       this.setState({
         visible: !this.state.visible,
@@ -21,7 +24,7 @@ class Row extends React.Component {
 
     render() {
       return (
-        <tr className={`table-row ${this.state.visible ? '' : 'row-hidden'}`}>
+        <tr className={`${this.state.visible ? '' : 'row-hidden'}`}>
           {
             Object.keys(this.props.data)
             .filter(key => this.props.excludedFields.includes(key) === false)
@@ -33,7 +36,7 @@ class Row extends React.Component {
                   )
                 }
                 )
-              }
+          }
           {
             this.props.isHeadRow === false
             && <Select
