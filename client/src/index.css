@@ -38,3 +38,8 @@
 .select {
   display: grid;
 }
+
+.table {
+  height: 80vh;
+  overflow: auto;
+}

@@ -3,8 +3,8 @@ import '../index.css';
 import PlaidLinkLogin from './PlaidLink';
 import TransactionsTable from './TransactionsTable';
 import Amount from './Amount';
-import TextField from '@material-ui/core/TextField';
 import uuid from 'uuid';
+import Form from 'react-bootstrap/Form';
 
 class Transactions extends React.Component {
 
@@ -80,7 +80,7 @@ class Transactions extends React.Component {
     }
 
     dayOffsetChange(e) {
-        this.setState({dayOffset: e.target.value * 1});
+      this.setState({dayOffset: e.target.value * 1});
     }
 
     onSuccess(public_token) {
@@ -121,8 +121,7 @@ class Transactions extends React.Component {
       if (!this.state.loggedIn) {
         return (
           <div className='half-wide-centered'>
-              <TextField
-                label='Day Offset'
+              <Form.Control type='days'
                 value={this.state.dayOffset}
                 onChange={this.dayOffsetChange} />
               <PlaidLinkLogin

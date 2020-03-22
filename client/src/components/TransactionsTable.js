@@ -1,36 +1,19 @@
 import React from 'react';
-import Paper from '@material-ui/core/Paper';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableHead from '@material-ui/core/TableHead';
 import Row from './Row';
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles({
-  root: {
-    width: '100%',
-    height: '500px',
-    overflowX: 'auto',
-    overflowY: 'scroll'
-  },
-  table: {
-    minWidth: 650,
-  },
-});
+import Table from 'react-bootstrap/Table';
 
 function TransactionsTable(props) {
-    const classes = useStyles();
     return (
-      <Paper className={classes.root}>
-        <Table>
-          <TableHead>
+      <div className='table'>
+        <Table striped>
+          <thead>
             <Row key='column-titles'
               data={props.columnNames}
               isHeadRow={true}
               excludedFields={[]}
               visible={true} />
-          </TableHead>
-          <TableBody>
+          </thead>
+          <tbody>
             {props.items.map(item => (
                   <Row key={item.id}
                     id={item.id}
@@ -42,9 +25,9 @@ function TransactionsTable(props) {
                     visible={true}/>
               )
             )}
-          </TableBody>
+          </tbody>
         </Table>
-      </Paper>
+      </div>
     )
   }
 

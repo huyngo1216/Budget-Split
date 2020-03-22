@@ -1,5 +1,4 @@
 import React from 'react';
-import TableCell from '@material-ui/core/TableCell';
 import Select from './Select';
 
 class Row extends React.Component {
@@ -30,12 +29,11 @@ class Row extends React.Component {
             .filter(key => this.props.excludedFields.includes(key) === false)
             .map(key => {
               return (
-                    <TableCell onClick={this.handleChange} align="center">
-                      {this.props.data[key]}
-                    </TableCell>
-                  )
-                }
-                )
+                <td onClick={this.handleChange} align='center'>
+                  {this.props.data[key]}
+                </td>
+              )
+            })
           }
           {
             this.props.isHeadRow === false

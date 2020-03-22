@@ -1,6 +1,6 @@
 import React from 'react';
-import LinearProgress from '@material-ui/core/LinearProgress';
-import Button from '@material-ui/core/Button';
+import ProgressBar from 'react-bootstrap/ProgressBar';
+import Button from 'react-bootstrap/Button';
 
 class PlaidLinkLogin extends React.Component {
 
@@ -53,11 +53,10 @@ class PlaidLinkLogin extends React.Component {
             <div>
                 <Button id='plaid-login'
                     onClick={this.onClick}
-                    variant='contained'
-                    color='primary'>
+                    variant="primary">
                     Login
                 </Button>
-                {this.state.loading && <LinearProgress />}
+                {this.state.loading && <ProgressBar />}
             </div>
         )
     }
