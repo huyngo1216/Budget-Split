@@ -3,8 +3,13 @@ import '../index.css';
 import PlaidLinkLogin from './PlaidLink';
 import TransactionsTable from './TransactionsTable';
 import Amount from './Amount';
+import GenericModal from './GenericModal';
 import uuid from 'uuid';
 import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+
+import {generateChargeStrings} from '../utils/chargeDescription';
+
 
 class Transactions extends React.Component {
 
@@ -16,6 +21,7 @@ class Transactions extends React.Component {
         total: 0,
         splitTotal: 0,
         dayOffset: 10,
+        showChargeDescription: false
       }
       this.onSuccess = this.onSuccess.bind(this);
       this.toggleTransactionVisibility = this.toggleTransactionVisibility.bind(this);
@@ -25,6 +31,21 @@ class Transactions extends React.Component {
       this.calcTotalWithDivisor = this.calcTotalWithDivisor.bind(this);
       this.renderLogin = this.renderLogin.bind(this);
       this.renderTransactions = this.renderTransactions.bind(this);
+      this.renderRequestDescription = this.renderRequestDescription.bind(this);
+      this.generateRequestDescription = this.generateRequestDescription.bind(this);
+      this.hideChargeModal = this.hideChargeModal.bind(this);
+    }
+
+    generateRequestDescription() {
+      this.setState(() => ({
+        showChargeDescription: true
+      }));
+    }
+
+    hideChargeModal() {
+      this.setState(() => ({
+        showChargeDescription: false
+      }));
     }
 
     calcTotalWithDivisor = (transactions = []) => (withDivisor = false) => {
@@ -145,6 +166,12 @@ class Transactions extends React.Component {
                 value={this.state.splitTotal}
               />
             </div>
+            <div className='export-btn'>
+              <Button block
+                onClick={this.generateRequestDescription}>
+                Generate Request Description
+              </Button>
+            </div>
             <div>
               <TransactionsTable
                 columnNames={['Name', 'Amount', 'Date', 'AccountName', 'Split Divisor']}
@@ -157,12 +184,22 @@ class Transactions extends React.Component {
         )
       }
     }
+
+    renderRequestDescription() {
+      if (this.state.showChargeDescription) {
+        const descs = generateChargeStrings(this.state.transactions);
+        return (
+          <GenericModal onHide={this.hideChargeModal} lines={descs}></GenericModal>
+        );
+      }
+    }
   
     render() {
       return (
         <div>
           {this.renderLogin()}
           {this.renderTransactions()}
+          {this.renderRequestDescription()}
         </div>
       )
     }

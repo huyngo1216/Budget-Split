@@ -21,8 +21,8 @@
   text-align: center;
 }
 
-.center {
-  margin: auto;
+.export-btn {
+  margin: 2vh 30vh 2vh 30vh
 }
 
 .half-wide-centered {
@@ -42,4 +42,12 @@
 .table {
   height: 80vh;
   overflow: auto;
+}
+
+.center-header {
+  margin: auto;
+}
+
+.textarea-full-width {
+  width: 100%;
 }

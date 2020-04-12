@@ -53,7 +53,7 @@ class PlaidLinkLogin extends React.Component {
             <div>
                 <Button id='plaid-login'
                     onClick={this.onClick}
-                    variant="primary">
+                    variant='primary'>
                     Login
                 </Button>
                 {this.state.loading && <ProgressBar />}
