@@ -26,7 +26,6 @@ app.use(express.static('public'))
 app.use(cors());
 
 app.post('/retrieve_transactions', function (req, res) {
-    console.log(req);
     const publicToken = req.body.public_token;
     client.exchangePublicToken(publicToken, function(error, accessTokenResponse) {
         if (error) {
@@ -63,6 +62,15 @@ app.post('/retrieve_transactions', function (req, res) {
             }
         )
     });
+})
+
+app.get('/categories', function(req, res) {
+    client.getCategories(function(err, response) {
+        if (err) {
+            console.log(err);
+        }
+        res.send(response);
+    })
 })
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
