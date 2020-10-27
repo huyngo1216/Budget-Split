@@ -9,6 +9,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 import {generateChargeStrings} from '../utils/chargeDescription';
+import {post} from '../utils/remoteCalls';
 
 
 class Transactions extends React.Component {
@@ -104,38 +105,32 @@ class Transactions extends React.Component {
       this.setState({dayOffset: e.target.value * 1});
     }
 
-    onSuccess(public_token) {
-      fetch('http://localhost:8000/retrieve_transactions',
-        {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            public_token,
-            dayOffset: this.state.dayOffset
-          }),
+    async onSuccess(public_token, metadata) {
+      await post('http://localhost:8000/retrieve_transactions',
+        JSON.stringify({
+          public_token,
+          dayOffset: this.state.dayOffset
+        }),
+        res => {
+          res.json().then(data => {
+            const curryCalcTotal = this.calcTotalWithDivisor(data.transactions);
+            this.setState({
+                transactions: data.transactions.filter((transaction) => transaction.amount > 0)
+                  .map((transaction) => {
+                    // all transactions are included by default
+                    transaction.hidden = false;
+                    // default behavior is to split the cost evenly
+                    transaction.divisor = 2;
+                    transaction.id = uuid.v4();
+                    return transaction;
+                  }),
+                total: curryCalcTotal(),
+                splitTotal: curryCalcTotal(true),
+                loggedIn: true,
+            })
+          });
         }
-      ).then(res => {
-        res.json().then(data => {
-          const curryCalcTotal = this.calcTotalWithDivisor(data.transactions);
-          this.setState({
-              transactions: data.transactions.filter((transaction) => transaction.amount > 0)
-                .map((transaction) => {
-                  // all transactions are included by default
-                  transaction.hidden = false;
-                  // default behavior is to split the cost evenly
-                  transaction.divisor = 2;
-                  transaction.id = uuid.v4();
-                  return transaction;
-                }),
-              total: curryCalcTotal(),
-              splitTotal: curryCalcTotal(true),
-              loggedIn: true,
-          })
-        })
-      });
+      );
     }
 
     renderLogin() {

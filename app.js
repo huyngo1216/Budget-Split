@@ -8,22 +8,37 @@ const dotenv = require('dotenv')
 dotenv.config();
 const port = process.env.PORT || 8000;
 
-const publicKey = process.env.PLAID_PUBLIC_KEY;
 const clientId = process.env.PLAID_CLIENT_ID;
 const clientSecret = process.env.PLAID_CLIENT_SECRET;
 const plaidEnv = process.env.PLAID_ENVIRONMENT;
-const client = new plaid.Client(
-    clientId,
-    clientSecret,
-    publicKey,
-    plaid.environments[plaidEnv],
-)
-
-app.use(bodyParser.json({
-    strict: true
-}))
+const client = new plaid.Client({
+    clientID: clientId,
+    secret: clientSecret,
+    env: plaid.environments[plaidEnv]
+});
+app.use(bodyParser.urlencoded({
+    extended: false
+  }));
+app.use(bodyParser.json());
 app.use(express.static('public'))
 app.use(cors());
+
+app.post('/create_link_token', async function(request, response) {
+    // 1. Grab the client_user_id by searching for the current user in your database
+    // 2. Create a link_token for the given user
+    const linkTokenResponse = await client.createLinkToken({
+      user: {
+        client_user_id: 'huyngo',
+      },
+      client_name: 'HuyNgo',
+      products: ['transactions'],
+      country_codes: ['US'],
+      language: 'en'
+    });
+    const link_token = linkTokenResponse.link_token;
+    // 3. Send the data to the client
+    response.json({ link_token });
+});
 
 app.post('/retrieve_transactions', function (req, res) {
     const publicToken = req.body.public_token;
