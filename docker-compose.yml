@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+  server:
+    image: "node:12-alpine"
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - PLAID_CLIENT_ID=client_id
+      - PLAID_CLIENT_SECRET=client_secret
+      - PLAID_ENVIRONMENT=development
+    command: >
+      sh -c "node app.js"
+  web:
+    image: "node:12-alpine"
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+    command: >
+      sh -c "cd client && npm start"
