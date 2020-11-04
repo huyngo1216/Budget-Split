@@ -10,12 +10,20 @@ services:
       - PLAID_CLIENT_SECRET=client_secret
       - PLAID_ENVIRONMENT=development
     command: >
-      sh -c "node app.js"
+      sh -c "cd app && npm install -g typescript && tsc && node out/app.js"
+    volumes:
+      - type: bind
+        source: ./
+        target: /app
   web:
     image: "node:12-alpine"
     ports:
       - "3000:3000"
     environment:
       - PORT=3000
+    volumes:
+      - type: bind
+        source: ./
+        target: /app
     command: >
-      sh -c "cd client && npm start"
+      sh -c "cd app/client && npm start"
